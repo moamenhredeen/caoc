@@ -26,23 +26,23 @@ rule clean
   description = Cleaning build directory
 
 # ---------------------------- Build targets ----------------------------
-build build/2024/2024_01_a.o: compile src/2024/2024_01_a.c
-build build/2024/2024_01_b.o: compile src/2024/2024_01_b.c
+build build/2024/01_a.o: compile src/2024/01_a.c
+build build/2024/01_b.o: compile src/2024/01_b.c
 
 # Create static library
-build build/2024/lib2024.a: archive build/2024/2024_01_a.o build/2024/2024_01_b.o
+build build/2024/lib2024.a: archive build/2024/01_a.o build/2024/01_b.o
 
 # Compile test files
-build build/tests/2024/2024_01.o: compile_test tests/2024/2024_01.c
+build build/tests/2024/01_test.o: compile_test tests/2024/01_test.c
 
 # Link tests with libraries
-build build/tests/2024/test_2024_01: link $
-    build/tests/2024/2024_01.o $
+build build/tests/2024/01_test: link $
+    build/tests/2024/01_test.o $
     build/2024/lib2024.a
 
 # Convenience targets
 build all_tests: phony $
-    build/tests/2024/test_2024_01
+    build/tests/2024/01_test
 
 build clean: clean
 
