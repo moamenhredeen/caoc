@@ -13,11 +13,19 @@ rule link
   command = $cc $in -o $out
   description = Linking $out
 
+rule archive
+  command = ar rcs $out $in
+  description = Creating static library $out
+
 # Build targets
 build build/1/solution.o: compile 2024/1/solution.c
 build build/1/test.o: compile 2024/1/test.c
 
-build build/1/test: link build/1/solution.o build/1/test.o
+# Create static library
+build build/1/libsolution.a: archive build/1/solution.o
+
+# Link test with library
+build build/1/test: link build/1/test.o build/1/libsolution.a
 
 # Default target
 default build/1/test
