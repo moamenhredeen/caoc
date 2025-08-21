@@ -1,0 +1,30 @@
+# Ninja build file for the C project
+
+# Variables
+cc = gcc
+cflags = -Wall -Wextra -std=c99 -g
+
+# Build rules
+rule compile
+  command = $cc $cflags -c $in -o $out
+  description = Compiling $in
+
+rule link
+  command = $cc $in -o $out
+  description = Linking $out
+
+# Build targets
+build build/solution.o: compile 2024/1/solution.c
+build build/test.o: compile 2024/1/test.c
+
+build build/test: link build/solution.o build/test.o
+
+# Default target
+default build/test
+
+# Clean rule
+rule clean
+  command = rm -rf build/
+  description = Cleaning build directory
+
+build clean: clean

@@ -1,6 +1,5 @@
 #include <stdio.h>
-
-int solve(int *left, int *right, int n);
+#include "solution.h"
 
 int main(){
     int left[] = {3, 4, 2, 1, 3, 3};
