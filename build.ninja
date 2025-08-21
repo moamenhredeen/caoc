@@ -14,13 +14,13 @@ rule link
   description = Linking $out
 
 # Build targets
-build build/solution.o: compile 2024/1/solution.c
-build build/test.o: compile 2024/1/test.c
+build build/1/solution.o: compile 2024/1/solution.c
+build build/1/test.o: compile 2024/1/test.c
 
-build build/test: link build/solution.o build/test.o
+build build/1/test: link build/1/solution.o build/1/test.o
 
 # Default target
-default build/test
+default build/1/test
 
 # Clean rule
 rule clean
