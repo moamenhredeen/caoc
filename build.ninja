@@ -1,13 +1,16 @@
-# Ninja build file for the C project
-
-# Variables
+# ---------------------------- Variables ----------------------------
 cc = gcc
 cflags = -Wall -Wextra -std=c99 -g
+test_cflags = -Wall -Wextra -std=c99 -g -Isrc -Itests
 
-# Build rules
+# ---------------------------- Build rules ----------------------------
 rule compile
   command = $cc $cflags -c $in -o $out
   description = Compiling $in
+  
+rule compile_test
+  command = $cc $test_cflags -c $in -o $out
+  description = Compiling test $in
 
 rule link
   command = $cc $in -o $out
@@ -17,22 +20,31 @@ rule archive
   command = ar rcs $out $in
   description = Creating static library $out
 
-# Build targets
-build build/1/solution.o: compile 2024/1/solution.c
-build build/1/test.o: compile 2024/1/test.c
-
-# Create static library
-build build/1/libsolution.a: archive build/1/solution.o
-
-# Link test with library
-build build/1/test: link build/1/test.o build/1/libsolution.a
-
-# Default target
-default build/1/test
-
 # Clean rule
 rule clean
   command = rm -rf build/
   description = Cleaning build directory
 
+# ---------------------------- Build targets ----------------------------
+build build/2024/2024_01_a.o: compile src/2024/2024_01_a.c
+build build/2024/2024_01_b.o: compile src/2024/2024_01_b.c
+
+# Create static library
+build build/2024/lib2024.a: archive build/2024/2024_01_a.o build/2024/2024_01_b.o
+
+# Compile test files
+build build/tests/2024/2024_01.o: compile_test tests/2024/2024_01.c
+
+# Link tests with libraries
+build build/tests/2024/test_2024_01: link $
+    build/tests/2024/2024_01.o $
+    build/2024/lib2024.a
+
+# Convenience targets
+build all_tests: phony $
+    build/tests/2024/test_2024_01
+
 build clean: clean
+
+# Default target
+default all_tests
