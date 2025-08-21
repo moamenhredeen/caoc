@@ -3,6 +3,18 @@
 	"tasks": [
 		{
 			"type": "shell",
+			"label": "Clean",
+			"command": "ninja",
+			"args": ["clean"],
+			"problemMatcher": [],
+			"detail": "Clean",
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			}
+		},
+		{
+			"type": "shell",
 			"label": "Build",
 			"command": "ninja",
 			"problemMatcher": [],
@@ -10,18 +22,22 @@
 			"group": {
 				"kind": "build",
 				"isDefault": true
-			}
+			},
+			"dependsOrder": "sequence",
+			"dependsOn": ["Clean"]
 		},
 		{
 			"type": "shell",
 			"label": "Run Tests",
-			"command": "build/tests/2024/test_2024_01",
+			"command": "build/tests/2024/01_test",
 			"problemMatcher": [],
 			"detail": "Run Tests",
 			"group": {
 				"kind": "test",
-				"isDefault": true
-			}
+				"isDefault": true 
+			},
+			"dependsOrder": "sequence",
+			"dependsOn": ["Build"]
 		}
 	]
 }
