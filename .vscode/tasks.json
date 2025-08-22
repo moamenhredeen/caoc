@@ -29,7 +29,7 @@
 		{
 			"type": "shell",
 			"label": "Run Tests",
-			"command": "build/tests/2024/01_test",
+			"command": "build/tests/2024/02_test",
 			"problemMatcher": [],
 			"detail": "Run Tests",
 			"group": {

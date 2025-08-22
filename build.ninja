@@ -27,24 +27,28 @@ rule clean
 
 # ---------------------------- Build targets ----------------------------
 build build/2024/01.o: compile src/2024/01.c
+build build/2024/02.o: compile src/2024/02.c
 
 # Create static library
-build build/2024/lib2024.a: archive build/2024/01.o
+build build/2024/lib2024.a: archive $
+  build/2024/01.o $
+  build/2024/02.o
 
 # Compile test files
 build build/tests/2024/01_test.o: compile_test tests/2024/01_test.c
+build build/tests/2024/02_test.o: compile_test tests/2024/02_test.c
 
 # Link tests with libraries
-build build/tests/2024/01_test: link $
-    build/tests/2024/01_test.o $
-    build/2024/lib2024.a
+build build/tests/2024/01_test: link build/tests/2024/01_test.o build/2024/lib2024.a
+build build/tests/2024/02_test: link build/tests/2024/02_test.o build/2024/lib2024.a
     
 # Clean target
 build clean: clean
 
 # Convenience targets
 build tests: phony $
-    build/tests/2024/01_test
+    build/tests/2024/01_test $
+    build/tests/2024/02_test
 
 # Default target
 default tests
