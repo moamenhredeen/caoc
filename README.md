@@ -2,6 +2,10 @@
 
 This is a collection of solutions to the Advent of Code 2024 puzzles.
 
+
+## TODO
+- [ ] use cmocka testing framework
+
 ## Solutions
 
 - [Day 1: Historian Hysteria](src/2024/01.c)
@@ -17,3 +21,4 @@ ninja clean
 ninja tests
 ./build/tests/2024/01_test
 ```
+
